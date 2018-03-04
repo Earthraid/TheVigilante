@@ -1,0 +1,31 @@
+DROP TABLE weapon;
+DROP TABLE armor;
+
+CREATE TABLE weapon
+( 
+  weapon_id INTEGER IDENTITY(1, 1) NOT NULL,  --ID for specific weapon
+  weapon_type varchar(30) NOT NULL,           --Type of weapon
+  weapon_damage int NOT NULL,                 --Damage f weapon
+  weapon_cost int NOT NULL,                   --Cost of weapon
+  CONSTRAINT pk_park_park_id PRIMARY KEY (weapon_id)
+);
+CREATE TABLE armor
+(
+	armor_id INTEGER IDENTITY(1,1) NOT NULL,  --ID for specific armor
+	armor_type varchar(30) NOT NULL,          --Type of armor
+	armor_value int NOT NULL,                 --Protecton value of armor
+	armor_cost int NOT NULL,                  --Cost of armor 
+	CONSTRAINT pk_armor_armor_id PRIMARY KEY (armor_id)
+);
+--WEAPONS
+INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Handgun', N'1', N'300')
+INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Handgun', N'2', N'325')
+INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Shotgun', N'3', N'350')
+INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Shotgun', N'4', N'375')
+INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Shotgun', N'5', N'400')
+INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'AR15', N'6', N'425')
+
+--ARMOR
+INSERT INTO armor ([armor_type], [armor_value], [armor_cost]) VALUES (N'Police Vest', N'2', N'300')
+INSERT INTO armor ([armor_type], [armor_value], [armor_cost]) VALUES (N'Military Body Armor', N'4', N'400')
+INSERT INTO armor ([armor_type], [armor_value], [armor_cost]) VALUES (N'Bomb Squad Outfit', N'6', N'500')

@@ -1,0 +1,12 @@
+CREATE TABLE games_files
+( 
+  save_id INTEGER IDENTITY(1, 1) NOT NULL,   --id for specific save
+  player_name varchar(30) NOT NULL,          --name of Player
+  player_level int NOT NULL,                 --level of Player
+  owned_weapon_type varchar(30),             -- Weapon if owned
+  owned_weapon_damage int,                   --Weapon damage if owned
+  owned_armor_type varchar(30),		         --Armor type if owned
+  owned_armor_value int,                     --Armor value if owned
+  player_money int NOT NULL                  -- current amount of Player money
+  CONSTRAINT pk_game_save_id PRIMARY KEY (save_id)
+);
