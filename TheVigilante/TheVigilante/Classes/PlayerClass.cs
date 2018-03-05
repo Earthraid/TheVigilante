@@ -9,17 +9,18 @@ namespace TheVigilante.Classes
 {
     public static class PlayerClass
     {
+        private static string databaseConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=TheVigilante;Integrated Security=True";
         private static string playerName;
         private static int playerLevel;
         private static int playerHitPoints;
         private static int maxHitPoints;
         private static int currentExp;
         private static int nextLevelExp;
-        private static string ownedWeaponType;
-        private static int ownedWeaponDamage;
-        private static string ownedArmorType;
-        private static int ownedArmorValue;
-        private static int playerMoney;
+        private static string ownedWeaponType = "";
+        private static int ownedWeaponDamage = 0;
+        private static string ownedArmorType = "";
+        private static int ownedArmorValue = 0;
+        private static int playerMoney = 0;
         private static int saveID = 0;
 
         //Properties
@@ -137,17 +138,57 @@ namespace TheVigilante.Classes
         }
 
         //Sets saveID to IDENTITY in game_file
-        public static void SaveGame(int save_id)
+        public static void SaveGame()
         {
-            saveID = save_id;
+            Console.Clear();
+            Console.WriteLine("\n Are you sure you wish to save?\n\n(Y)es or (N)o?\n\n");
+            Console.Write(" "); string selection = Console.ReadLine().ToLower();
+            Console.WriteLine();
+
+            if (selection == "y" || selection == "yes")
+            {
+                if (SaveID == 0)
+                {
+                    Console.Clear();
+                    DAL save = new DAL(databaseConnectionString);
+                    save.InsertSaveFile();
+                    
+                }
+                else
+                {
+                    Console.Clear();
+                    DAL save = new DAL(databaseConnectionString);
+                    save.UpdateSaveFileList(SaveID);
+                }
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("\n Ok, game not saved. \n\n Why'd you even come here?\n\n");
+                Thread.Sleep(2000);
+                Console.Clear();
+            }
         }
 
         //To do
-        public static bool CheckSave()
+        public static void CheckSave(int newsaveID)
         {
-            //Check to confirm save successful
-            //Confirm current properties contained in data row
-            return false;
+            saveID = newsaveID;
+
+            if (saveID > 0)
+            {
+                Console.Clear();
+                Console.WriteLine("\n Save successful.\n\n");
+                Thread.Sleep(2000);
+                Console.Clear();
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("\n Save failed.\n\n");
+                Thread.Sleep(2000);
+                Console.Clear();
+            }
         }
 
         //Adds money to player bank after battle victory
@@ -179,16 +220,14 @@ namespace TheVigilante.Classes
                 NextLevelExperience();
                 LevelUp();
                 AddPlayerMoney(money);
-                SaveGame(SaveID);
-                GameInterface thisMenu = new GameInterface();
+                GameMenus thisMenu = new GameMenus();
                 thisMenu.GoHome();
             }
             else
             {
                 CriminalClass.CriminalMaxHitPoints();
                 SpendPlayerMoney(money);
-                SaveGame(SaveID);
-                GameInterface thisMenu = new GameInterface();
+                GameMenus thisMenu = new GameMenus();
                 thisMenu.GoHome();
             }
 
@@ -196,7 +235,7 @@ namespace TheVigilante.Classes
         }
 
         //Loads game information
-        public static bool LoadGame(int save_id, string player_name, int player_level, int player_money, string owned_weapon_type, int owned_weapon_damage, string owned_armor_type, int owned_armor_value)
+        public static void LoadGame(int save_id, string player_name, int player_level, int player_money, string owned_weapon_type, int owned_weapon_damage, string owned_armor_type, int owned_armor_value)
         {
             saveID = save_id;
             playerName = player_name;
@@ -207,7 +246,6 @@ namespace TheVigilante.Classes
             ownedArmorType = owned_armor_type;
             ownedArmorValue = owned_armor_value;
 
-            return true;
 
         }
     }

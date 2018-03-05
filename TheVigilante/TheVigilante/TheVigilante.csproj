@@ -45,16 +45,16 @@
     <Compile Include="Classes\Armor.cs" />
     <Compile Include="Classes\CombatClass.cs" />
     <Compile Include="Classes\CriminalClass.cs" />
-    <Compile Include="Classes\GameInteface.cs" />
     <Compile Include="Classes\GameMenus.cs" />
     <Compile Include="Classes\PlayerClass.cs" />
     <Compile Include="Classes\DAL.cs" />
+    <Compile Include="Classes\SaveFile.cs" />
     <Compile Include="Classes\Weapon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Classes\App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests\" />

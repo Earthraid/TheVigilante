@@ -87,22 +87,28 @@ namespace TheVigilante.Classes
             return criminalAttack;
         }
 
-        //Should this take a bool for ease of use in other methods? ex: if (playerHealth <= 0) { CombatEndFight(true) }
+        //Gives consequences of the fight ending, however that may be
         public void CombatEndFight()
         {
             if (PlayerClass.PlayerHitPoints <= 0)
             {
+                Console.WriteLine();
                 Console.WriteLine(" You got knocked out! Hey, at least they didn't kill you.\n");
                 Console.WriteLine($" You've lost {(PlayerClass.PlayerMoney / 10).ToString("C")}\n");
+                Thread.Sleep(3000);
+                Console.Clear();
                 PlayerClass.EndFight(false, PlayerClass.PlayerMoney / 10);
                 CriminalClass.CriminalMaxHitPoints();
                 stillFighting = false;
             }
             else if (CriminalClass.CriminalHitPoints <= 0)
             {
+                Console.WriteLine();
                 Console.WriteLine(" You've won. Justice.\n");
                 Console.WriteLine($" You've gained {(CriminalClass.CriminalMoney).ToString("C")}\n");
                 Console.WriteLine($" You've gained {CriminalClass.CriminalExperience} XP.\n");
+                Thread.Sleep(3000);
+                Console.Clear();
                 PlayerClass.EndFight(true, CriminalClass.CriminalMoney);
                 CriminalClass.CriminalMaxHitPoints();
                 stillFighting = false;
@@ -110,31 +116,31 @@ namespace TheVigilante.Classes
         }
 
         //Gives player the opprtunity to run from fight at a cost of 10% of $$
-        public bool Run(string input)
+        public void Run(string input)
         {
             if (input == "y" || input == "yes")
             {
+                Console.Clear();
                 Console.WriteLine();
                 Console.WriteLine(" Just another coward posing as a hero.\n");
                 Console.WriteLine($" You've lost {(PlayerClass.PlayerMoney / 10).ToString("C")}\n");
                 Console.WriteLine(" Cry in your pillow at home...\n");
+                Thread.Sleep(3000);
                 PlayerClass.EndFight(false, PlayerClass.PlayerMoney / 10);
-                Thread.Sleep(2000);
-                CriminalClass.CriminalMaxHitPoints();
                 stillFighting = false;
             }
             else if (input == "n"|| input =="no")
             {
-                run = false;
+                Console.WriteLine();
+                Console.WriteLine(" You suck it up and keep fighting.\n");
             }
             else
             {
                 Console.WriteLine();
                 Console.WriteLine(" Not too good at directions, huh?\n");
                 Console.WriteLine(" Hopefully you survive this round.\n");
+                Console.WriteLine();
             }
-            return run;
-
         }
 
         //Checks hitpoints to end fight if one's hitpoints falls to 0 or below.
