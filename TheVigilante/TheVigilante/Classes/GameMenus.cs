@@ -41,7 +41,8 @@ namespace TheVigilante.Classes
                     Console.WriteLine($" \"{PlayerClass.PlayerName},\" you responded. As you pressed your hands firmly against her stomach.\n\n");
 
                     OriginWriter();
-
+                    Console.WriteLine("\n Press any key to continue. \n");
+                    Console.ReadLine();
                     //Gives the first "Go Home" option
                     while (firstMenu)
                     {
@@ -511,14 +512,14 @@ namespace TheVigilante.Classes
             else if (Int32.TryParse(selection, out int outNum))
             {
                 //Confirms selection is a valid input number
-                if (outNum > 0 && outNum <= saves.Count)
+                if (outNum >= 0 && outNum <= saves.Count)
                 {
                     selection = saves[(Int32.Parse(selection) - 1)].SaveId.ToString();
                     Console.Clear();
                     Console.WriteLine($"\n You sure this is what you want?\n");
                     Console.WriteLine("  No.   Name        Level");
                     Console.WriteLine(" _________________________");
-                    Console.WriteLine("  " + saves[Int32.Parse(selection) - 1] + "\n");
+                    Console.WriteLine("  " + saves[Int32.Parse(selection) -1] + "\n");
                     Console.WriteLine();
                     Console.WriteLine(" (Y)es or (N)o?\n");
                     Console.Write(" "); string input = Console.ReadLine().ToLower();
