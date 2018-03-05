@@ -58,6 +58,7 @@ namespace TheVigilante
             return allWeapons;
         }
 
+        //Creats and stores a List<Armor>
         public List<Armor> ArmorList(int armornSelection)
         {
             List<Armor> allArmor = new List<Armor>();

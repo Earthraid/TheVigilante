@@ -41,7 +41,7 @@ namespace TheVigilante.Classes
                     Console.WriteLine($" \"{PlayerClass.PlayerName},\" you responded. As you pressed your hands firmly against her stomach.\n\n");
 
                     OriginWriter();
-                    Console.WriteLine("\n Press any key to continue. \n");
+                    Console.WriteLine("\n Press Enter key to continue. \n");
                     Console.ReadLine();
                     //Gives the first "Go Home" option
                     while (firstMenu)
@@ -102,7 +102,7 @@ namespace TheVigilante.Classes
                 while (!sr.EndOfStream)
                 {
                     Console.WriteLine(sr.ReadLine());
-                    Thread.Sleep(1000);
+                    //Thread.Sleep(1000);
                 }
             }
         }
@@ -512,14 +512,13 @@ namespace TheVigilante.Classes
             else if (Int32.TryParse(selection, out int outNum))
             {
                 //Confirms selection is a valid input number
-                if (outNum >= 0 && outNum <= saves.Count)
+                if (outNum > 0 && outNum <= count)
                 {
-                    selection = saves[(Int32.Parse(selection) - 1)].SaveId.ToString();
                     Console.Clear();
                     Console.WriteLine($"\n You sure this is what you want?\n");
                     Console.WriteLine("  No.   Name        Level");
-                    Console.WriteLine(" _________________________");
-                    Console.WriteLine("  " + saves[Int32.Parse(selection) -1] + "\n");
+                    Console.WriteLine(" _________________________");    
+                    Console.WriteLine("  " + saves[(Int32.Parse(selection)) - 1] + "\n");
                     Console.WriteLine();
                     Console.WriteLine(" (Y)es or (N)o?\n");
                     Console.Write(" "); string input = Console.ReadLine().ToLower();
@@ -527,7 +526,7 @@ namespace TheVigilante.Classes
                     //Confirms load selection
                     if (input == "y" || input == "yes")
                     {
-                        PlayerClass.LoadGame(saves[Int32.Parse(selection) - 1].SaveId, saves[Int32.Parse(selection) - 1].PlayerName, saves[Int32.Parse(selection) - 1].PlayerLevel, saves[Int32.Parse(selection) - 1].PlayerMoney, saves[Int32.Parse(selection) - 1].OwnedWeapon, saves[Int32.Parse(selection) - 1].OwnedWeaponDMG, saves[Int32.Parse(selection) - 1].OwnedArmor, saves[Int32.Parse(selection) - 1].OwnedArmorVAL);
+                        PlayerClass.LoadGame(saves[(Int32.Parse(selection))-1].SaveId, saves[(Int32.Parse(selection))-1].PlayerName, saves[(Int32.Parse(selection))-1].PlayerLevel, saves[(Int32.Parse(selection))-1].PlayerMoney, saves[(Int32.Parse(selection))-1].OwnedWeapon, saves[(Int32.Parse(selection))-1].OwnedWeaponDMG, saves[(Int32.Parse(selection))-1].OwnedArmor, saves[(Int32.Parse(selection))-1].OwnedArmorVAL);
                         Console.WriteLine("\n Game loaded successfully.  Try to be better than last time.\n\n");
                         Thread.Sleep(2000);
                         newOrLoad = false;

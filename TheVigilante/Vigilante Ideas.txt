@@ -1,44 +1,20 @@
 Vigilante:
 
-Need to write an origin story.  Just a random guy tired of bullshit to explain why your start rolls are so low.
-Let character be named by player. string CharName = Console.Readline();
-
-Uses Dictionary to hold crime levels as keys and assigns a value
-to the key.
+Type DELETE in load game screen to delete specific game.
 
 Criminals are on a list assigned with crimes commited.  If crime value is >
 certain value player can decide to go capture.
-
-Criminals assigned value of toughness, vigilante rolls against criminal.  If victory, gain 
-level that changes value right of random number rolled for Vigilante.
-
-Level up allows fighting tougher criminals.
 
 List of firstName list of lastName to create new names.  Random grab of number of crimes based on difficulty.
 Presents # of criminals to choose from.
 
 If you lose to criminal, criminal is tougher next time.
 
-Defeating opponents gives money that can buy armor(subtrahend enemy roll) or 
-weapons(addends player roll).
-{if (weapon){playerRoll + weaponVal}; if (armor){enemyRoll - armorVal};}
-
 After a while you fight the Main criminal and move to a new city.
 
 INTERFACE:
 Show List of Criminals, Crimes and Value. 1.2.3. etc
 player types number of criminal to fight.
-auto rolls for both and returns damage to each.
 
 Design when I can figure out graphics:
-green stick figures on blak background adds weapon and armore graphic onto figure.
-
-Player and criminal health minuses.
-
-After each attack ask Run/Fight.
-
-Program Needs:
-Criminal Class
-Player Class
-Weapon Class
-Armor Class
+green stick figures on black background adds weapon and armore graphic onto figure.
