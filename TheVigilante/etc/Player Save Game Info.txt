@@ -1,4 +1,6 @@
-CREATE TABLE games_files
+--DROP TABLE game_files
+
+CREATE TABLE game_files
 ( 
   save_id INTEGER IDENTITY(1, 1) NOT NULL,   --id for specific save
   player_name varchar(30) NOT NULL,          --name of Player

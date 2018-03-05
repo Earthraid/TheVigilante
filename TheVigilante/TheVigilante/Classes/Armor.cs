@@ -12,14 +12,17 @@ namespace TheVigilante.Classes
         {
             get; set;
         }
+
         public string Armor_Type
         {
             get; set;
         }
+
         public int Armor_Value
         {
             get; set;
         }
+
         public int Armor_Cost
         {
             get; set;

@@ -21,12 +21,19 @@ namespace TheVigilante.Classes
         public void FightOrder()
         {
             stillFighting = true;
+
+            //Decides fight order
             int fightOrder = rnd.Next(0, 1);
+
+            //Player hits first
             if (fightOrder == 0)
             {
                 Console.WriteLine(" You got the jump on this scum-bag.\n");
                 while (stillFighting)
                 {
+                    Console.Clear();
+                    Console.WriteLine($" Player Health: {PlayerClass.PlayerHitPoints}    Criminal Health: {CriminalClass.CriminalHitPoints} \n");
+
                     PlayerAttack();
                     Console.WriteLine($" You hit {CriminalClass.CriminalName} for {playerAttack}.\n");
                     CheckHitPonts(CriminalClass.CriminalHitPoints);
@@ -44,11 +51,14 @@ namespace TheVigilante.Classes
                     Console.WriteLine();
                 }
             }
+            //Criminal hits first
             else
             {
                 Console.WriteLine(" This jack ass saw you coming a mile away.\n");
                 while (stillFighting)
                 {
+                    Console.Clear();
+                    Console.WriteLine($" Player Health: {PlayerClass.PlayerHitPoints}    Criminal Health: {CriminalClass.CriminalHitPoints} \n");
                     CriminalAttack();
                     Console.WriteLine($" Oof. You got hit for {criminalAttack}.\n");
                     CheckHitPonts(PlayerClass.PlayerHitPoints);
@@ -129,7 +139,7 @@ namespace TheVigilante.Classes
                 PlayerClass.EndFight(false, PlayerClass.PlayerMoney / 10);
                 stillFighting = false;
             }
-            else if (input == "n"|| input =="no")
+            else if (input == "n" || input == "no")
             {
                 Console.WriteLine();
                 Console.WriteLine(" You suck it up and keep fighting.\n");

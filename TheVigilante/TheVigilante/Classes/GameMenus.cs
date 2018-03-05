@@ -52,10 +52,11 @@ namespace TheVigilante.Classes
                         //Sends home for the first time
                         if (selection == "1")
                         {
+                            atHome = true;
+                            firstMenu = false;
+                            newOrLoad = false;
                             GoHome();
 
-                            firstMenu = false;
-                            atHome = true;
                         }
 
                         //mocks fail
@@ -74,16 +75,15 @@ namespace TheVigilante.Classes
                     //Print list of available games to load
                     PrintLoadList();
                     LoadGame();
+                    Thread.Sleep(2000);
                     GoHome();
-                    newOrLoad = false;
-
                 }
 
                 //Mock fail
                 else
                 {
-                    Console.WriteLine();
-                    Console.WriteLine(" Fat fingers or dumb brain?  Try again.");
+                    Console.Clear();
+                    Console.WriteLine("\n Fat fingers or dumb brain?  Try again.");
                     Console.WriteLine();
                     Thread.Sleep(2000);
                     Console.Clear();
@@ -101,7 +101,7 @@ namespace TheVigilante.Classes
                 while (!sr.EndOfStream)
                 {
                     Console.WriteLine(sr.ReadLine());
-                    // Thread.Sleep(1000);
+                    Thread.Sleep(1000);
                 }
             }
         }
@@ -142,6 +142,7 @@ namespace TheVigilante.Classes
                 Console.WriteLine(" 1. \"Store\"\n\n 2. Go fight\n\n 3. Save Game\n\n 4. Quit Game\n\n");
                 Console.Write(" "); string homeSelection = Console.ReadLine();
                 Console.WriteLine();
+
                 //Got to store
                 if (homeSelection == "1")
                 {
@@ -149,7 +150,7 @@ namespace TheVigilante.Classes
                     while (atStore)
                     {
                         Console.Clear();
-                        Console.WriteLine(" Which would you like to purchase? \n\n 1. Weapons \n\n 2. Armor\n\n \"B\" to go back home.");
+                        Console.WriteLine("\n Which would you like to purchase? \n\n 1. Weapons \n\n 2. Armor\n\n \"B\" to go back home.\n");
                         Console.Write(" "); selection = Console.ReadLine().ToLower();
                         Console.WriteLine();
 
@@ -188,7 +189,7 @@ namespace TheVigilante.Classes
                                 Console.Clear();
                                 Console.WriteLine("\n The directions weren't clear enough?  You drop some money because you're an idiot.\n");
                                 PlayerClass.SpendPlayerMoney(1);
-                                Console.WriteLine(" You somehow got lost and ended up back home... Wow...\n");
+                                Console.WriteLine("\n You somehow got lost and ended up back home... Wow...\n");
                                 Thread.Sleep(3000);
                                 Console.Clear();
                                 atHome = true;
@@ -243,6 +244,7 @@ namespace TheVigilante.Classes
                     }
 
                 }
+
                 //Save your game
                 else if (homeSelection == "3")
                 {
@@ -253,6 +255,7 @@ namespace TheVigilante.Classes
                 {
                     Environment.Exit(0);
                 }
+
                 //Mock your fail
                 else
                 {
@@ -505,7 +508,7 @@ namespace TheVigilante.Classes
             }
 
             //Try parses a selection input
-            if (Int32.TryParse(selection, out int outNum))
+            else if (Int32.TryParse(selection, out int outNum))
             {
                 //Confirms selection is a valid input number
                 if (outNum > 0 && outNum <= saves.Count)
@@ -562,6 +565,24 @@ namespace TheVigilante.Classes
                     atHome = false;
 
                 }
+            }
+
+            //Do not load game
+            else if( selection == "no" || selection == "n")
+            {
+                Console.Clear();
+                Console.WriteLine("\n Forget to save your game last time?\n\n");
+                Console.Clear();
+                newOrLoad = true;
+            }
+
+            //Mocks fail
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("\n Why don't you get it together?\n\n");
+                newOrLoad = true;
+                atHome = false;
             }
         }
     }

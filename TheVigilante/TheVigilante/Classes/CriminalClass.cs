@@ -59,6 +59,7 @@ namespace TheVigilante.Classes
             criminalExperience = CriminalLevel * 10 + 100;
         }
 
+        //Creates new criminal on GoFight
         public static void CreateCriminal()
         {
             //Create full name of criminal

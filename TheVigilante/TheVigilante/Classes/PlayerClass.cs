@@ -170,7 +170,7 @@ namespace TheVigilante.Classes
             }
         }
 
-        //To do
+        //Ensures save-id exists in game
         public static void CheckSave(int newsaveID)
         {
             saveID = newsaveID;
@@ -201,13 +201,6 @@ namespace TheVigilante.Classes
         public static decimal SpendPlayerMoney(int spentMoney)
         {
             return playerMoney -= spentMoney;
-        }
-        
-        //To do --- Add bool to trigger origin story if !Loaded.
-        public static bool LoadGame()
-        {
-            //if 
-            return true;
         }
 
         //Ends fight based on criterion from Combat Class

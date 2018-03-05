@@ -91,7 +91,7 @@ namespace TheVigilante
             return allArmor;
         }
 
-        //To do -- Write a list to print load games
+        //Allows creation of load file list
         public List<SaveFile> LoadGameFile(int gameFileSelection)
         {
             List<SaveFile> allSaves = new List<SaveFile>();
@@ -130,6 +130,7 @@ namespace TheVigilante
             return allSaves;
         }
 
+        //Creates new save file
         public void InsertSaveFile()
         {
             try
@@ -162,6 +163,7 @@ namespace TheVigilante
             }
         }
 
+        //Updates existing save game
         public void UpdateSaveFileList(int gameFileSelection)
         {
 
