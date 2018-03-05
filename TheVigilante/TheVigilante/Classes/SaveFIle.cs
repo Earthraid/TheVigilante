@@ -47,5 +47,10 @@ namespace TheVigilante.Classes
         {
             get; set;
         }
+
+        public override string ToString()
+        {
+            return SaveId.ToString().PadRight(5) + PlayerName.PadRight(15) + PlayerLevel.ToString();
+        }
     }
 }
