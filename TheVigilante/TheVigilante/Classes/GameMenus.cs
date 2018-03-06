@@ -12,8 +12,8 @@ namespace TheVigilante.Classes
     {
         private string originPath = @"C:\Users\jchristian\Desktop\TheVigilante\TheVigilante\etc\OriginStory.txt";
         const string DatabaseConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=TheVigilante;Integrated Security=True";
-        private int count;
-        private string selection;
+        //private int count;
+        //private string selection;
         private List<Weapon> weapons;
         private List<Armor> armor;
         private List<SaveFile> saves;
@@ -21,7 +21,7 @@ namespace TheVigilante.Classes
         private bool atStore = true;
         private bool newOrLoad = true;
         private bool firstMenu = true;
-        private string input;
+        //private string input;
 
         //Start of game
         public void RunInterface()
@@ -29,7 +29,7 @@ namespace TheVigilante.Classes
             while (newOrLoad)
             {
                 Console.WriteLine("\n 1. New Game\n\n 2. Load Game\n\n");
-                Console.Write(" "); selection = Console.ReadLine();
+                Console.Write(" "); string selection = Console.ReadLine();
 
                 //New game
                 if (selection == "1")
@@ -74,7 +74,7 @@ namespace TheVigilante.Classes
                 else if (selection == "2")
                 {
                     //Print list of available games to load
-                    PrintLoadList();
+                    PrintLoadList(selection);
                     LoadGame();
                     Thread.Sleep(2000);
                     GoHome();
@@ -152,13 +152,13 @@ namespace TheVigilante.Classes
                     {
                         Console.Clear();
                         Console.WriteLine("\n Which would you like to purchase? \n\n 1. Weapons \n\n 2. Armor\n\n \"B\" to go back home.\n");
-                        Console.Write(" "); selection = Console.ReadLine().ToLower();
+                        Console.Write(" "); string selection = Console.ReadLine().ToLower();
                         Console.WriteLine();
 
                         //Prints weapons to purchase
                         if (selection == "1")
                         {
-                            PrintWeapons();
+                            PrintWeapons(selection);
                             atStore = false;
                             GoToWeaponStore();
                         }
@@ -166,7 +166,7 @@ namespace TheVigilante.Classes
                         //Prints armor to purchase
                         else if (selection == "2")
                         {
-                            PrintArmor();
+                            PrintArmor(selection);
                             atStore = false;
                             GoToArmorStore();
                         }
@@ -270,11 +270,11 @@ namespace TheVigilante.Classes
         }
 
         //Prints weapon list
-        public void PrintWeapons()
+        public void PrintWeapons(string selection)
         {
             DAL newWeaponList = new DAL(DatabaseConnectionString);
             weapons = newWeaponList.WeaponList(Int32.Parse(selection));
-            count = weapons.Count();
+            int count = weapons.Count();
             Console.Clear();
             Console.WriteLine("\n No.     Type      Damage      Cost");
             Console.WriteLine("____________________________________");
@@ -290,11 +290,11 @@ namespace TheVigilante.Classes
         }
 
         //Prints armor list
-        public void PrintArmor()
+        public void PrintArmor(string selection)
         {
             DAL newArmorList = new DAL(DatabaseConnectionString);
             armor = newArmorList.ArmorList(Int32.Parse(selection));
-            count = armor.Count();
+            int count = armor.Count();
             Console.Clear();
             Console.WriteLine();
             Console.WriteLine("\n No.     Type             Damage      Cost");
@@ -312,7 +312,7 @@ namespace TheVigilante.Classes
         public void GoToWeaponStore()
         {
             Console.WriteLine(" Choose something to purchase or select \"B\" to go back.");
-            Console.Write(" "); selection = Console.ReadLine().ToLower();
+            Console.Write(" "); string selection = Console.ReadLine().ToLower();
 
             //Goes back to store menu
             if (selection == "b")
@@ -321,7 +321,7 @@ namespace TheVigilante.Classes
             }
 
             //Try parses a selection input
-            if (Int32.TryParse(selection, out int outNum))
+            else if (Int32.TryParse(selection, out int outNum))
             {
                 //Confirms selection is a valid input number
                 if (outNum > 0 && outNum <= weapons.Count)
@@ -335,43 +335,44 @@ namespace TheVigilante.Classes
                     Console.WriteLine();
                     Console.WriteLine(" (Y)es or (N)o?\n");
                     Console.Write(" "); string input = Console.ReadLine().ToLower();
-
+                    //return input;
+                    ConfirmWeaponPurchase(selection, input);
                     //Confirms weapon purchase and subtracts cost from player money
-                    if ((input == "y" || input == "yes") && PlayerClass.PlayerMoney >= weapons[Int32.Parse(selection) - 1].Weapon_Cost)
-                    {
-                        PlayerClass.SetWeapon(weapons[Int32.Parse(selection) - 1].Weapon_Type, weapons[Int32.Parse(selection) - 1].Weapon_Damage);
-                        Console.WriteLine("\n Thanks. Anything else you want?");
-                        Thread.Sleep(2000);
-                        atStore = true;
+                    //if ((input == "y" || input == "yes") && PlayerClass.PlayerMoney >= weapons[Int32.Parse(selection) - 1].Weapon_Cost)
+                    //{
+                    //    PlayerClass.SetWeapon(weapons[Int32.Parse(selection) - 1].Weapon_Type, weapons[Int32.Parse(selection) - 1].Weapon_Damage);
+                    //    Console.WriteLine("\n Thanks. Anything else you want?");
+                    //    Thread.Sleep(2000);
+                    //    atStore = true;
 
-                    }
+                    //}
 
-                    //Does not allow purchase due to shortage of funds
-                    else if ((input == "y" || input == "yes") && PlayerClass.PlayerMoney < weapons[Int32.Parse(selection) - 1].Weapon_Cost)
-                    {
-                        Console.Clear();
-                        Console.WriteLine("\n Why don't you get some money and come back?  Stop wasting my time.");
-                        Thread.Sleep(2000);
-                        atStore = true;
-                    }
+                    ////Does not allow purchase due to shortage of funds
+                    //else if ((input == "y" || input == "yes") && PlayerClass.PlayerMoney < weapons[Int32.Parse(selection) - 1].Weapon_Cost)
+                    //{
+                    //    Console.Clear();
+                    //    Console.WriteLine("\n Why don't you get some money and come back?  Stop wasting my time.");
+                    //    Thread.Sleep(2000);
+                    //    atStore = true;
+                    //}
 
-                    //returns to the store menu
-                    else if (input == "n" || input == "no")
-                    {
-                        Console.Clear();
-                        Console.WriteLine("\n Stop wasting my time.");
-                        Thread.Sleep(2000);
-                        Console.WriteLine();
-                        atStore = true;
-                    }
+                    ////returns to the store menu
+                    //else if (input == "n" || input == "no")
+                    //{
+                    //    Console.Clear();
+                    //    Console.WriteLine("\n Stop wasting my time.");
+                    //    Thread.Sleep(2000);
+                    //    Console.WriteLine();
+                    //    atStore = true;
+                    //}
 
-                    //mocks fail
-                    else
-                    {
-                        Console.WriteLine("\n Why don't you get it together?");
-                        Thread.Sleep(2000);
-                        atStore = true;
-                    }
+                    ////mocks fail
+                    //else
+                    //{
+                    //    Console.WriteLine("\n Why don't you get it together?");
+                    //    Thread.Sleep(2000);
+                    //    atStore = true;
+                    //}
                 }
 
                 //mocks fail
@@ -401,7 +402,7 @@ namespace TheVigilante.Classes
         public void GoToArmorStore()
         {
             Console.WriteLine("\n Choose something to purchase or select \"B\" to go back.");
-            selection = Console.ReadLine().ToLower();
+            Console.Write(" ");string selection = Console.ReadLine().ToLower();
 
             //Goes back to store menu
             if (selection == "b")
@@ -410,7 +411,7 @@ namespace TheVigilante.Classes
             }
 
             //Attempts to parse selection input
-            if (Int32.TryParse(selection, out int outNum))
+            else if (Int32.TryParse(selection, out int outNum))
             {
                 //Validates input selection
                 if (outNum > 0 && outNum <= armor.Count)
@@ -424,39 +425,39 @@ namespace TheVigilante.Classes
                     Console.WriteLine();
                     Console.WriteLine(" (Y)es or (N)o?\n");
                     string input = Console.ReadLine().ToLower();
+                    ConfirmArmorPurchase(selection, input);
+                    //Confirms armor purchase
+                    //if ((input == "y" || input == "yes") && PlayerClass.PlayerMoney >= armor[Int32.Parse(selection) - 1].Armor_Cost)
+                    //{
+                    //    PlayerClass.SetArmor(armor[Int32.Parse(selection) - 1].Armor_Type, armor[Int32.Parse(selection) - 1].Armor_Value);
+                    //    Console.WriteLine("\n Thanks. Anything else you want?");
+                    //    Thread.Sleep(2000);
+                    //    atStore = true;
 
-                    //Need to figure out money issue
-                    if ((input == "y" || input == "yes") && PlayerClass.PlayerMoney >= armor[Int32.Parse(selection) - 1].Armor_Cost)
-                    {
-                        PlayerClass.SetArmor(armor[Int32.Parse(selection) - 1].Armor_Type, armor[Int32.Parse(selection) - 1].Armor_Value);
-                        Console.WriteLine("\n Thanks. Anything else you want?");
-                        Thread.Sleep(2000);
-                        atStore = true;
+                    //}
+                    //else if ((input == "y" || input == "yes") && PlayerClass.PlayerMoney < armor[Int32.Parse(selection) - 1].Armor_Cost)
+                    //{
+                    //    Console.Clear();
+                    //    Console.WriteLine("\n Why don't you get some money and come back?  Stop wasting my time.");
+                    //    Thread.Sleep(2000);
+                    //    atStore = true;
+                    //}
+                    //else if (input == "n" || input == "no")
+                    //{
+                    //    Console.Clear();
+                    //    Console.WriteLine("\n Stop wasting my time.\n");
+                    //    Thread.Sleep(2000);
+                    //    atStore = true;
+                    //    atHome = false;
 
-                    }
-                    else if ((input == "y" || input == "yes") && PlayerClass.PlayerMoney < armor[Int32.Parse(selection) - 1].Armor_Cost)
-                    {
-                        Console.Clear();
-                        Console.WriteLine("\n Why don't you get some money and come back?  Stop wasting my time.");
-                        Thread.Sleep(2000);
-                        atStore = true;
-                    }
-                    else if (input == "n" || input == "no")
-                    {
-                        Console.Clear();
-                        Console.WriteLine("\n Stop wasting my time.\n");
-                        Thread.Sleep(2000);
-                        atStore = true;
-                        atHome = false;
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("\n Why don't you get it together?");
-                        Thread.Sleep(2000);
-                        Console.Clear();
-                        atStore = true;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("\n Why don't you get it together?");
+                    //    Thread.Sleep(2000);
+                    //    Console.Clear();
+                    //    atStore = true;
+                    //}
                 }
 
                 //mocks fail
@@ -481,25 +482,26 @@ namespace TheVigilante.Classes
         }
 
         //Prints available games to load
-        public void PrintLoadList()
+        public int PrintLoadList(string selection)
         {
             Console.Clear();
             DAL newLoadList = new DAL(DatabaseConnectionString);
             saves = newLoadList.LoadGameFile(Int32.Parse(selection));
-            count = saves.Count();
+            int count = saves.Count();
             Console.WriteLine("\n No.    Name        Level");
             Console.WriteLine("___________________________");
             foreach (SaveFile s in saves)
             {
                 Console.WriteLine($" {((saves.IndexOf(s)) + 1).ToString().PadRight(5)}{s.PlayerName.PadRight(15)}{s.PlayerLevel.ToString()}\n");
             }
+            return count;
         }
 
         //Loads chosen game file
         public void LoadGame()
         {
             Console.WriteLine("\n Select a game to load.\n\n \"B\" to go back");
-            Console.Write(" "); selection = Console.ReadLine();
+            Console.Write(" "); string selection = Console.ReadLine();
 
             //Goes back to store menu
             if (selection == "b")
@@ -512,7 +514,7 @@ namespace TheVigilante.Classes
             else if (Int32.TryParse(selection, out int outNum))
             {
                 //Confirms selection is a valid input number
-                if (outNum > 0 && outNum <= count)
+                if (outNum > 0 && outNum <= PrintLoadList(selection))
                 {
                     Console.Clear();
                     Console.WriteLine($"\n You sure this is what you want?\n");
@@ -520,7 +522,8 @@ namespace TheVigilante.Classes
                     Console.WriteLine(" _________________________");    
                     Console.WriteLine("  " + saves[(Int32.Parse(selection)) - 1] + "\n");
                     Console.WriteLine();
-                    Console.WriteLine(" (Y)es or (N)o?\n");
+                    Console.WriteLine(" (Y)es or (N)o?\n Type DELETE to delete this file.");
+                    //Console.WriteLine("\n Type DELETE to delete this file.");
                     Console.Write(" "); string input = Console.ReadLine().ToLower();
 
                     //Confirms load selection
@@ -544,6 +547,11 @@ namespace TheVigilante.Classes
                         atHome = false;
                     }
 
+                    //Deletes this save game file
+                    //else if(input == "delete")
+                    //{
+
+                    //}
                     //mocks fail
                     else
                     {
@@ -583,6 +591,85 @@ namespace TheVigilante.Classes
                 Console.WriteLine("\n Why don't you get it together?\n\n");
                 newOrLoad = true;
                 atHome = false;
+            }
+        }
+
+        //Weapon confirm purchase
+        public void ConfirmWeaponPurchase(string selection, string input)
+        {
+            //Confirms weapon purchase and subtracts cost from player money
+            if ((input == "y" || input == "yes") && PlayerClass.PlayerMoney >= weapons[Int32.Parse(selection) - 1].Weapon_Cost)
+            {
+                PlayerClass.SetWeapon(weapons[Int32.Parse(selection) - 1].Weapon_Type, weapons[Int32.Parse(selection) - 1].Weapon_Damage);
+                Console.WriteLine("\n Thanks. Anything else you want?");
+                Thread.Sleep(2000);
+                atStore = true;
+
+            }
+
+            //Does not allow purchase due to shortage of funds
+            else if ((input == "y" || input == "yes") && PlayerClass.PlayerMoney < weapons[Int32.Parse(selection) - 1].Weapon_Cost)
+            {
+                Console.Clear();
+                Console.WriteLine("\n Why don't you get some money and come back?  Stop wasting my time.");
+                Thread.Sleep(2000);
+                atStore = true;
+            }
+
+            //returns to the store menu
+            else if (input == "n" || input == "no")
+            {
+                Console.Clear();
+                Console.WriteLine("\n Stop wasting my time.");
+                Thread.Sleep(2000);
+                Console.WriteLine();
+                atStore = true;
+            }
+
+            //mocks fail
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("\n Why don't you get it together?");
+                Thread.Sleep(2000);
+                atStore = true;
+            }
+        }
+
+        //Armor confirm purchase
+        public void ConfirmArmorPurchase(string selection, string input)
+        {
+            if ((input == "y" || input == "yes") && PlayerClass.PlayerMoney >= armor[Int32.Parse(selection) - 1].Armor_Cost)
+            {
+                PlayerClass.SetArmor(armor[Int32.Parse(selection) - 1].Armor_Type, armor[Int32.Parse(selection) - 1].Armor_Value);
+                Console.WriteLine("\n Thanks. Anything else you want?");
+                Thread.Sleep(2000);
+                atStore = true;
+
+            }
+            else if ((input == "y" || input == "yes") && PlayerClass.PlayerMoney < armor[Int32.Parse(selection) - 1].Armor_Cost)
+            {
+                Console.Clear();
+                Console.WriteLine("\n Why don't you get some money and come back?  Stop wasting my time.");
+                Thread.Sleep(2000);
+                atStore = true;
+            }
+            else if (input == "n" || input == "no")
+            {
+                Console.Clear();
+                Console.WriteLine("\n Stop wasting my time.\n");
+                Thread.Sleep(2000);
+                atStore = true;
+                atHome = false;
+
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("\n Why don't you get it together?");
+                Thread.Sleep(2000);
+                Console.Clear();
+                atStore = true;
             }
         }
     }
