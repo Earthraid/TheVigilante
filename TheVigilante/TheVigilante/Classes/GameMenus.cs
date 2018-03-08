@@ -11,6 +11,7 @@ namespace TheVigilante.Classes
     class GameMenus
     {
         private string originPath = @"C:\Users\jchristian\Desktop\TheVigilante\TheVigilante\etc\OriginStory.txt";
+        private string readMePath = @"C:\Users\jchristian\Desktop\TheVigilante\TheVigilante\etc\README.txt";
         const string DatabaseConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=TheVigilante;Integrated Security=True";
        
         private List<Weapon> weapons;
@@ -27,7 +28,7 @@ namespace TheVigilante.Classes
         {
             while (newOrLoad)
             {
-                Console.WriteLine("\n 1. New Game\n\n 2. Load Game\n\n");
+                Console.WriteLine("\n 1. New Game\n\n 2. Load Game\n\n 3. Read Me\n\n");
                 Console.Write(" "); string selection = Console.ReadLine();
 
                 //New game
@@ -79,6 +80,15 @@ namespace TheVigilante.Classes
                     GoHome();
                 }
 
+                //Prints README.txt
+                else if (selection == "3")
+                {
+                    Console.Clear();
+                    Console.WriteLine();
+                    PrintReadMe();
+                    Console.WriteLine("\n Press Enter key to continue. \n");
+                    Console.ReadLine();
+                }
                 //Mock fail
                 else
                 {
@@ -102,6 +112,17 @@ namespace TheVigilante.Classes
                 {
                     Console.WriteLine(sr.ReadLine());
                     //Thread.Sleep(1000);
+                }
+            }
+        }
+        public void PrintReadMe()
+        {
+            using (StreamReader sr = new StreamReader(readMePath))
+            {
+                while (!sr.EndOfStream)
+                {
+                    Console.WriteLine(sr.ReadLine());
+                 
                 }
             }
         }
