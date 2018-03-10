@@ -18,14 +18,14 @@ CREATE TABLE armor
 	CONSTRAINT pk_armor_armor_id PRIMARY KEY (armor_id)
 );
 --WEAPONS
-INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Handgun', N'1', N'300')
-INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Handgun', N'2', N'325')
-INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Shotgun', N'3', N'350')
-INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Shotgun', N'4', N'375')
-INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Shotgun', N'5', N'400')
-INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'AR15', N'6', N'425')
+INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Low-Point', N'1', N'300')
+INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'S&M .9mm', N'2', N'400')
+INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Demington', N'3', N'500')
+INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Block 23', N'4', N'600')
+INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Fig Sour', N'5', N'700')
+INSERT INTO weapon ([weapon_type], [weapon_damage], [weapon_cost]) VALUES (N'Panderson AR15', N'6', N'800')
 
 --ARMOR
-INSERT INTO armor ([armor_type], [armor_value], [armor_cost]) VALUES (N'Police Vest', N'2', N'300')
-INSERT INTO armor ([armor_type], [armor_value], [armor_cost]) VALUES (N'Military Body Armor', N'4', N'400')
-INSERT INTO armor ([armor_type], [armor_value], [armor_cost]) VALUES (N'Bomb Squad Outfit', N'6', N'500')
+INSERT INTO armor ([armor_type], [armor_value], [armor_cost]) VALUES (N'Police Vest', N'2', N'400')
+INSERT INTO armor ([armor_type], [armor_value], [armor_cost]) VALUES (N'Military Body Armor', N'4', N'500')
+INSERT INTO armor ([armor_type], [armor_value], [armor_cost]) VALUES (N'Bomb Squad Outfit', N'6', N'650')

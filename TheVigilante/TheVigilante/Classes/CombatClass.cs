@@ -51,6 +51,7 @@ namespace TheVigilante.Classes
                     Console.WriteLine();
                 }
             }
+
             //Criminal hits first
             else
             {
@@ -82,7 +83,7 @@ namespace TheVigilante.Classes
         //Calculates and applies player's attack value
         public int PlayerAttack()
         {
-            playerAttack = rnd.Next(PlayerClass.PlayerLevel + 5, PlayerClass.PlayerLevel + 10) + PlayerClass.OwnedWeaponDamage;
+            playerAttack = rnd.Next(PlayerClass.PlayerLevel + 10, PlayerClass.PlayerLevel + 20) + PlayerClass.OwnedWeaponDamage;
             CriminalClass.CriminalHitPoints -= playerAttack;
             CheckHitPonts(CriminalClass.CriminalHitPoints);
             return playerAttack;
@@ -91,7 +92,7 @@ namespace TheVigilante.Classes
         //Calculates and applies criminal's attack value
         public int CriminalAttack()
         {
-            criminalAttack = rnd.Next(CriminalClass.CriminalLevel + 5, CriminalClass.CriminalLevel + 10) - PlayerClass.OwnedArmorValue;
+            criminalAttack = rnd.Next(CriminalClass.CriminalLevel + 9, CriminalClass.CriminalLevel + 19) - PlayerClass.OwnedArmorValue;
             PlayerClass.PlayerHitPoints -= criminalAttack;
             CheckHitPonts(PlayerClass.PlayerHitPoints);
             return criminalAttack;

@@ -41,7 +41,7 @@ namespace TheVigilante.Classes
                     Console.WriteLine($" \"{PlayerClass.PlayerName},\" you responded. As you pressed your hands firmly against her stomach.\n\n");
 
                     OriginWriter();
-                    Console.WriteLine("\n Press Enter key to continue. \n");
+
                     Console.ReadLine();
                     //Gives the first "Go Home" option
                     while (firstMenu)
@@ -115,6 +115,8 @@ namespace TheVigilante.Classes
                 }
             }
         }
+
+        //Prints the read me file
         public void PrintReadMe()
         {
             using (StreamReader sr = new StreamReader(readMePath))

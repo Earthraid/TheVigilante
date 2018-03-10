@@ -55,7 +55,7 @@ namespace TheVigilante.Classes
         //Constructor
         static CriminalClass()
         {
-            criminalMoney = (criminalLevel * 2) + 5;
+            criminalMoney = (criminalLevel * 2) + 10;
             criminalExperience = CriminalLevel * 10 + 100;
         }
 
@@ -70,7 +70,7 @@ namespace TheVigilante.Classes
             //Create criminal level
             criminalLevel = rnd.Next(-1, 1) + PlayerClass.PlayerLevel;
             //Criminal money
-            criminalMoney = (criminalLevel * 2) + 5;
+            criminalMoney = (criminalLevel * 2) + 20;
             //Creates health stat for criminal
             criminalHitPoints = (criminalLevel * 10) + 90;
             //Creates amount of experience given to player upon defeat
