@@ -44,7 +44,7 @@ namespace TheVigilante.Classes
                     CheckHitPonts(PlayerClass.PlayerHitPoints);
                     Thread.Sleep(500);
 
-                    Console.Write(" Do you want to wimp out and run away? (Y)es or (N)o?: ");
+                    Console.Write(" Do you want to keep fighting? (Y)es or (N)o?: ");
                     input = Console.ReadLine().ToLower();
                     Run(input);
                     Console.WriteLine();
@@ -129,7 +129,8 @@ namespace TheVigilante.Classes
         //Gives player the opprtunity to run from fight at a cost of 10% of $$
         public void Run(string input)
         {
-            if (input == "y" || input == "yes")
+            //Causes player to run from battle
+            if (input == "n" || input == "no")
             {
                 Console.Clear();
                 Console.WriteLine();
@@ -140,11 +141,15 @@ namespace TheVigilante.Classes
                 PlayerClass.EndFight(false, PlayerClass.PlayerMoney / 10);
                 stillFighting = false;
             }
-            else if (input == "n" || input == "no")
+
+            //Continues fight wth criminal
+            else if (input == "y" || input == "yes")
             {
                 Console.WriteLine();
                 Console.WriteLine(" You suck it up and keep fighting.\n");
             }
+
+            //Mocks fail
             else
             {
                 Console.WriteLine();

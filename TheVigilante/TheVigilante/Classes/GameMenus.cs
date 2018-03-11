@@ -89,6 +89,7 @@ namespace TheVigilante.Classes
                     Console.WriteLine("\n Press Enter key to continue. \n");
                     Console.ReadLine();
                 }
+
                 //Mock fail
                 else
                 {
@@ -158,6 +159,7 @@ namespace TheVigilante.Classes
             Console.Clear();
             while (atHome)
             {
+                Console.WriteLine($" Name: {PlayerClass.PlayerName}  Level: {PlayerClass.PlayerLevel}  Bank Account: {PlayerClass.PlayerMoney.ToString("C")}");
                 PlayerClass.PlayerHitPoints = PlayerClass.MaxHitPoints;
                 Console.WriteLine("\n You're home.  You hate it here.\n");
                 Console.WriteLine(" You're feelng rested and ready to move. \n \n What would you like to do?\n");
@@ -172,101 +174,16 @@ namespace TheVigilante.Classes
                     atStore = true;
                     while (atStore)
                     {
-                        Console.Clear();
-                        Console.WriteLine("\n Which would you like to purchase? \n\n 1. Weapons \n\n 2. Armor\n\n \"B\" to go back home.\n");
-                        Console.Write(" "); string selection = Console.ReadLine().ToLower();
-                        Console.WriteLine();
-
-                        //Prints weapons to purchase
-                        if (selection == "1")
-                        {
-                            PrintWeapons(selection);
-                            atStore = false;
-                            GoToWeaponStore();
-                        }
-
-                        //Prints armor to purchase
-                        else if (selection == "2")
-                        {
-                            PrintArmor(selection);
-                            atStore = false;
-                            GoToArmorStore();
-                        }
-
-                        //Goes back to previuos menu
-                        else if (selection == "b")
-                        {
-                            Console.Clear();
-                            Console.WriteLine("\n Headed back home.  You hate that dump.\n");
-
-                            atHome = true;
-                            atStore = false;
-                        }
-
-                        //mocks fail
-                        else
-                        {
-                            Console.Clear();
-                            if (PlayerClass.PlayerMoney != 0)
-                            {
-                                Console.Clear();
-                                Console.WriteLine("\n The directions weren't clear enough?  You drop some money because you're an idiot.\n");
-                                PlayerClass.SpendPlayerMoney(1);
-                                Console.WriteLine("\n You somehow got lost and ended up back home... Wow...\n");
-                                Thread.Sleep(3000);
-                                Console.Clear();
-                                atHome = true;
-                                atStore = false;
-                            }
-                            else
-                            {
-                                Console.Clear();
-                                Console.WriteLine("\n Not super good at directions, eh?  This vigilante thing is going to work out great...\n");
-                                Console.WriteLine(" You somehow got lost and ended up back home... Wow...\n");
-                                Thread.Sleep(3000);
-                                Console.Clear();
-                                atHome = true;
-                                atStore = false;
-                            }
-                        }
+                        GoToStore();
+                        
                     }
                 }
 
                 //Fight a criminal
                 else if (homeSelection == "2")
                 {
-                    Console.Clear();
-                    CriminalClass.CreateCriminal();
-                    Console.WriteLine($"\n You decide to stroll the neighborhoods where you know criminals hide.\n\n You find {CriminalClass.CriminalName}\n");
-                    Console.WriteLine($" Name: {CriminalClass.CriminalName} Level: {CriminalClass.CriminalLevel} Crime Commited: {CriminalClass.CrimeCommited} \n");
-                    Console.WriteLine(" 1. Go fight \n\n 2. Run away\n\n");
-                    Console.Write(" "); string doFight = Console.ReadLine();
-                    Console.WriteLine();
-
-                    //Goes to fight criminal
-                    if (doFight == "1")
-                    {
-                        Console.Clear();
-                        CombatClass newCombat = new CombatClass();
-                        newCombat.FightOrder();
-                    }
-
-                    //Run away, lose money and face
-                    else if (doFight == "2")
-                    {
-                        Console.WriteLine();
-                        CombatClass newCombat = new CombatClass();
-                        newCombat.Run("yes");
-                        Thread.Sleep(2000);
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        Console.WriteLine("\n I hope you lose the next fight...");
-                        Thread.Sleep(3000);
-                        Console.Clear();
-                    }
-
+                    GoToFight();
+                   
                 }
 
                 //Save your game
@@ -330,6 +247,69 @@ namespace TheVigilante.Classes
             }
 
             Console.WriteLine("\n Money: " + PlayerClass.PlayerMoney.ToString("C") + "\n");
+        }
+
+        //Go to store
+        public void GoToStore()
+        {
+            Console.WriteLine($" Name: {PlayerClass.PlayerName}  Level: {PlayerClass.PlayerLevel}  Bank Account: {PlayerClass.PlayerMoney.ToString("C")}");
+            Console.Clear();
+            Console.WriteLine("\n Which would you like to purchase? \n\n 1. Weapons \n\n 2. Armor\n\n \"B\" to go back home.\n");
+            Console.Write(" "); string selection = Console.ReadLine().ToLower();
+            Console.WriteLine();
+
+            //Prints weapons to purchase
+            if (selection == "1")
+            {
+                PrintWeapons(selection);
+                atStore = false;
+                GoToWeaponStore();
+            }
+
+            //Prints armor to purchase
+            else if (selection == "2")
+            {
+                PrintArmor(selection);
+                atStore = false;
+                GoToArmorStore();
+            }
+
+            //Goes back to previuos menu
+            else if (selection == "b")
+            {
+                Console.Clear();
+                Console.WriteLine("\n Headed back home.  You hate that dump.\n");
+
+                atHome = true;
+                atStore = false;
+            }
+
+            //mocks fail
+            else
+            {
+                Console.Clear();
+                if (PlayerClass.PlayerMoney != 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("\n The directions weren't clear enough?  You drop some money because you're an idiot.\n");
+                    PlayerClass.SpendPlayerMoney(1);
+                    Console.WriteLine("\n You somehow got lost and ended up back home... Wow...\n");
+                    Thread.Sleep(3000);
+                    Console.Clear();
+                    atHome = true;
+                    atStore = false;
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("\n Not super good at directions, eh?  This vigilante thing is going to work out great...\n");
+                    Console.WriteLine(" You somehow got lost and ended up back home... Wow...\n");
+                    Thread.Sleep(3000);
+                    Console.Clear();
+                    atHome = true;
+                    atStore = false;
+                }
+            }
         }
 
         //Go to weapon store
@@ -438,6 +418,54 @@ namespace TheVigilante.Classes
                 Console.WriteLine("\n Please push a button that makes sense. Idiot...\n");
                 Thread.Sleep(2000);
                 atStore = true;
+            }
+        }
+
+        //Go to fight a criminal
+        public void GoToFight()
+        {
+            Console.Clear();
+            CriminalClass.CreateCriminal();
+            Console.WriteLine($"\n You decide to stroll the neighborhoods where you know criminals hide.\n\n You find {CriminalClass.CriminalName}\n");
+            Console.WriteLine($" Name: {CriminalClass.CriminalName} Level: {CriminalClass.CriminalLevel} Crime Commited: {CriminalClass.CrimeCommited} \n");
+            Console.WriteLine(" 1. Go fight \n\n 2. Run away\n\n \"B\" to run home.");
+            Console.Write(" "); string doFight = Console.ReadLine().ToLower();
+            Console.WriteLine();
+
+            //Goes to fight criminal
+            if (doFight == "1")
+            {
+                Console.Clear();
+                CombatClass newCombat = new CombatClass();
+                newCombat.FightOrder();
+            }
+
+            //Run away, lose money and face
+            else if (doFight == "2")
+            {
+                Console.WriteLine();
+                CombatClass newCombat = new CombatClass();
+                newCombat.Run("yes");
+                Thread.Sleep(2000);
+            }
+
+            //Go back home
+            else if (doFight == "b")
+            {
+                Console.Clear();
+                Console.WriteLine("\n You wimp out and head home\n\n");
+                Thread.Sleep(1000);
+                Console.Clear();
+                atHome = true;
+            }
+
+            //Mock fail
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("\n I hope you lose the next fight...");
+                Thread.Sleep(3000);
+                Console.Clear();
             }
         }
 
